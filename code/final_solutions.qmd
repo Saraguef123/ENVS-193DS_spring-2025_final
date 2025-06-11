@@ -113,3 +113,13 @@ Swift parrots are an endangered species and the nest boxes were intended for the
 
 ## c. Difference in “seasons”
 the authors present data from the years 2016 and 2019. They used data specifically from each year during the breeding season of the Swift parrots in 2016 and 2019 specifically a that season that had a mast tree flowering event that had set off a breeding event
+
+##d. Table of models 
+## Table of Models
+
+| Model number | Year (Season) | Distance to forest edge | Model description                     |
+|:------------:|:-------------:|:------------------------:|----------------------------------------|
+| 0            | No            | No                       | no predictors (Null model)             |
+| 1            | Yes           | No                       | Year only                              |
+| 2            | No            | Yes                      | Distance to forest edge                |
+| 3            | Yes           | Yes                      | all predictors (full model)  
