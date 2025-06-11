@@ -39,3 +39,9 @@ In part 1 they used a person's R test because they specifically  state no correl
 One additional part  in part 2 the author could have addressed is a Post-HOC: Tukey HSD test because it would be meaningful to know which sources are different from each other. For example is there a difference in average nitrogen load between fertilizers and urban land.
 Another addition they could have mentioned is the effective size because it would be more descriptive to know the magnitude of the differences between sources, not just saying they are significant with a p value because there could be a significant p value but we want to  know the magnitude and what it means in the context of the problem.
 
+## c.)
+We found a (size difference (η2= effect size) difference in average nitrogen load between sources(one-way ANOVA, F(?, ?) = value, p < 0.02, α = significance level).
+
+
+# Problem 2. Data visualization 
+
