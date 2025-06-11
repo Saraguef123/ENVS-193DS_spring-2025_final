@@ -8,3 +8,25 @@ format:
     toc-depth: 3 
 ---
 [View this Github Repo](https://github.com/Saraguef123/ENVS-193DS_spring-2025_final)
+
+# Homework set up
+
+```{r setup, warning = FALSE, message=FALSE}
+
+ library(tidyverse)
+library(janitor)
+library(gt)
+library(effsize)
+sst <- read.csv("SST_update2023.csv")
+nest_boxes <- read.csv("occdist.csv")
+library(here)
+library(readxl)
+library(scales)
+library(ggeffects)
+library(MuMIn)
+library(dplyr)
+library(RColorBrewer)
+library(DHARMa)
+
+```
+
