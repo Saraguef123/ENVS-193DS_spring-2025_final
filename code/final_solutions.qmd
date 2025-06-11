@@ -45,3 +45,30 @@ We found a (size difference (η2= effect size) difference in average nitrogen lo
 
 # Problem 2. Data visualization 
 
+##a.) Cleaning and Summarizing 
+```{r}
+sst_clean <- sst |> 
+  clean_names() |> 
+  select(temp,date) |> 
+  mutate(
+    date = mdy(date),
+    year = year(date),
+    month = month(date, label= TRUE, abbr = TRUE),
+    month = as_factor(month),
+    month = fct_relevel(
+month,
+"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) |> 
+filter(year %in% c(2018,2019,2020,2021,2022,2023)) |> 
+  mutate(year = as_factor(year)) |> 
+group_by(year,month) |> 
+  summarize(
+    mean_monthly_sst = round(mean(temp), 1),
+    .groups = "drop")
+sst_clean |> 
+  ungroup() |> 
+  select(year,month, mean_monthly_sst) |> 
+  slice_sample(n = 5)
+```
+
+
