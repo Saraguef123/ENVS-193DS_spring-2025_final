@@ -103,3 +103,7 @@ labs(
 
 ```
 
+# Problem 3. Data analysis
+
+## a. Response variable
+
