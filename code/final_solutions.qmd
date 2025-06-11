@@ -9,7 +9,7 @@ format:
 ---
 [View this Github Repo](https://github.com/Saraguef123/ENVS-193DS_spring-2025_final)
 
-# Homework set up
+# Final Set Up
 
 ```{r setup, warning = FALSE, message=FALSE}
 
@@ -17,8 +17,6 @@ format:
 library(janitor)
 library(gt)
 library(effsize)
-sst <- read.csv("SST_update2023.csv")
-nest_boxes <- read.csv("occdist.csv")
 library(here)
 library(readxl)
 library(scales)
@@ -27,6 +25,14 @@ library(MuMIn)
 library(dplyr)
 library(RColorBrewer)
 library(DHARMa)
+sst <- read.csv(here("data","SST_update2023.csv"))
+nest_boxes <- read.csv(here("data","occdist.csv"))
 
 ```
 
+# Problem 1: Research Writing
+
+## a.) Transparent statistical methods
+In part 1 they used a person's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a persons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
+
+## b.) More information needed
