@@ -166,3 +166,46 @@ plot(model1)
 plot(model2)
 plot(model3)
 ```
+## g. Select the best model
+```{r}
+AICc(model0,
+     model1,
+     model2,
+     model3 
+     ) |> 
+  # arranging output in descending order of AIC
+  arrange(AICc)
+```
+The best model as determined by Akaike's Information Criterion(AIC) included predictors edge distance and seasons(2016 and 2019) and the response is if swift parrot was present(occupied=1, not occupied =0)
+
+##h. Visualize the model predictions
+```{r}
+model_preds <- ggpredict(model3,
+                         terms = c(
+                                   "edge_distance",
+                                   "season"))
+```
+
+```{r}
+model_preds_plotting <-  model_preds |> # using model preds data frame to create object for momdel prediction plotting
+  rename(edge_distance = x,  season = group) #renaming edge distance column
+
+ggplot() +
+  geom_jitter(data=nest_boxes_clean, #uses nest boxes clean data frame
+              aes(x= edge_distance, y= sp_occupant, color = season), #uses orginal data for underlying points
+              alpha = 0.3, #makes points transparent
+              width = 0.05, #jitter horizontally
+              height = 0) + #no vertical jitter
+  geom_line(data= model_preds_plotting, #uses model_preds_plotting data frame
+             aes(x= edge_distance, #x-axis as edge distance
+                 y= predicted, color = season))+  # predicted probability for model
+  geom_ribbon(data=model_preds_plotting, #uses model_preds_plotting data frame
+              aes(x= edge_distance, # x-axis as edge distance
+                  ymin = conf.low, 
+                  ymax = conf.high, fill= season), #lower and upper bounds of CI
+              alpha= 0.15) +
+  
+  theme_classic()
+```
+
+
