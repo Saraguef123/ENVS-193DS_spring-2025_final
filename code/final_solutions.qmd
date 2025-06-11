@@ -36,3 +36,6 @@ nest_boxes <- read.csv(here("data","occdist.csv"))
 In part 1 they used a person's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a persons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
 
 ## b.) More information needed
+One additional part  in part 2 the author could have addressed is a Post-HOC: Tukey HSD test because it would be meaningful to know which sources are different from each other. For example is there a difference in average nitrogen load between fertilizers and urban land.
+Another addition they could have mentioned is the effective size because it would be more descriptive to know the magnitude of the differences between sources, not just saying they are significant with a p value because there could be a significant p value but we want to  know the magnitude and what it means in the context of the problem.
+
