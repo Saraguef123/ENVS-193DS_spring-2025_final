@@ -120,6 +120,42 @@ the authors present data from the years 2016 and 2019. They used data specifical
 | Model number | Year (Season) | Distance to forest edge | Model description                     |
 |:------------:|:-------------:|:------------------------:|----------------------------------------|
 | 0            | No            | No                       | no predictors (Null model)             |
-| 1            | Yes           | No                       | Year only                              |
+| 1            | Yes           | No                       | Season  only                           |
 | 2            | No            | Yes                      | Distance to forest edge                |
 | 3            | Yes           | Yes                      | all predictors (full model)  
+
+## e. cleaning data/Run the models
+```{r}
+nest_boxes_clean <- nest_boxes |> 
+  clean_names() |> 
+  mutate(box_occupant = case_match(
+    box_occupant,
+    "common starling" ~ "Sturnus vulgaris",
+    "swift parrot" ~ "Lathamus discolor",
+    "tree martin" ~ "Petrochelidon nigricans")
+  ) |> 
+  mutate(season = as_factor(season)) |>        
+  rename(sp_occupant=sp) |> 
+ select(edge_distance, season, sp_occupant) |> 
+drop_na() 
+
+```
+
+```{r}
+  
+model0 <- glm(sp_occupant~1,
+              data = nest_boxes_clean,
+              family = "binomial")
+
+model3 <- glm(sp_occupant ~edge_distance + season,
+              data = nest_boxes_clean,
+               family = "binomial")
+              
+model2 <- glm(sp_occupant ~ edge_distance,
+              data = nest_boxes_clean,
+               family = "binomial")
+model1 <- glm(sp_occupant~ season,
+              data = nest_boxes_clean,
+               family = "binomial")
+```
+
