@@ -106,4 +106,8 @@ labs(
 # Problem 3. Data analysis
 
 ## a. Response variable
+The 1s and 0s in this data describes if the nest boxes were occupied by each species with 0 being no and 1 being yes.
+
+## b. Purpose of study
+Swift parrots are an endangered species and the nest boxes were intended for them however they have different breeding patterns that lead to them not nesting in same location. Non target species are the common sterling which are native to the study area and can exploit the nest boxes. The tree martins however are nest competitors with both the common sterling and swift parrot
 
