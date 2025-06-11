@@ -33,7 +33,7 @@ nest_boxes <- read.csv(here("data","occdist.csv"))
 # Problem 1: Research Writing
 
 ## a.) Transparent statistical methods
-In part 1 they used a person's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a persons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
+In part 1 they used a person's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being annual total nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a persons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
 
 ## b.) More information needed
 One additional part  in part 2 the author could have addressed is a Post-HOC: Tukey HSD test because it would be meaningful to know which sources are different from each other. For example is there a difference in average nitrogen load between fertilizers and urban land.
@@ -76,3 +76,30 @@ str(sst_clean)
 ```
 
 ## b. Visualize the data 
+```{r}
+ggplot(data = sst_clean,
+       aes(x=month,
+           y= mean_monthly_sst,
+           color = year,
+           group = year))+
+geom_point() +
+  geom_line()+
+
+labs(
+  x = "Month",
+  y = "Mean monthly sea surface temperature(°C)",
+  color = "Year"
+)  
+  #scale_color_manual(values = )+
+ #theme_classic()
+  #theme(
+#panel.grid.major = element_blank(),
+#panel.grid.minor = element_blank(),
+#panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+#legend.position = c(0.1,0.7))
+#makes a gray border
+    
+  
+
+```
+
