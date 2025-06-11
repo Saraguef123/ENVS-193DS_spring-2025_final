@@ -1,5 +1,10 @@
 ---
-title: "final_solutions"
-format: html
+title: "ENVS-193DS Final"
+author: "Sara Guefroudj"
+date: 6/11/2025
+format:
+  html:
+    toc: true # This line enables the Table of Contents
+    toc-depth: 3 
 ---
-
+[View this Github Repo](https://github.com/Saraguef123/ENVS-193DS_spring-2025_final)
