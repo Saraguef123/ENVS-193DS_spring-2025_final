@@ -71,4 +71,8 @@ sst_clean |>
   slice_sample(n = 5)
 ```
 
+```{r}
+str(sst_clean)
+```
 
+## b. Visualize the data 
