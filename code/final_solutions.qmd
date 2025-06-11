@@ -159,3 +159,10 @@ model1 <- glm(sp_occupant~ season,
                family = "binomial")
 ```
 
+```{r model-diagnostics}
+par(mfrow = c(2, 2)) # displays plots in a 2x2 grid
+plot(model0)
+plot(model1)
+plot(model2)
+plot(model3)
+```
