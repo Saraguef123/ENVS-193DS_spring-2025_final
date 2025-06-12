@@ -40,7 +40,7 @@ One additional part  in part 2 the author could have addressed is a Post-HOC: Tu
 Another addition they could have mentioned is the effect size because it would be more descriptive to know the magnitude of the differences between sources, not just saying they are significant with a p value because there could be a significant p value but we want to  know the magnitude of difference and what it means in the context of the problem.
 
 ## c.)
-We found a (size difference (η2= effect size) difference in average nitrogen load between sources(one-way ANOVA, F(?, ?) = value, p < 0.02, α = significance level).
+We found a difference (η2= effect size) in average nitrogen load between sources(urban land, atmospheric deposition, fertilizer, waste water treatment, and grasslands)(one-way ANOVA, F(?, ?) = value, p = 0.02, α = significance level).We found a correlation between distance from headwater and annual total nitrogen load(Post-hoc: Tukey HSD, p=0.03)
 
 
 # Problem 2. Data visualization 
@@ -102,8 +102,8 @@ labs(
   theme(
 panel.grid.major = element_blank(), # no grid lines
 panel.grid.minor = element_blank(), #no grid lines
-panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
-legend.position = c(0.1,0.7)) # makes a border
+panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),# makes a border
+legend.position = c(0.1,0.7)) # changes legend position
     
   
 
@@ -112,16 +112,16 @@ legend.position = c(0.1,0.7)) # makes a border
 # Problem 3. Data analysis
 
 ## a. Response variable
-The 1s and 0s in this data describes if the nest boxes were occupied by each species with 0 being no and 1 being yes.
+The 1s and 0s in this data describes if the nest boxes were occupied by each species with 0 being no and 1 being yes it occupied it.
 
 ## b. Purpose of study
 Swift parrots are an endangered species and the nest boxes were intended for them however they have different breeding patterns that lead to them not nesting in same location. Non target species are the common sterling which are native to the study area and can exploit the nest boxes. The tree martins however are nest competitors with both the common sterling and swift parrot
 
 ## c. Difference in “seasons”
-the authors present data from the years 2016 and 2019. They used data specifically from each year during the breeding season of the Swift parrots in 2016 and 2019 specifically a that season that had a mast tree flowering event that had set off a breeding event
+The authors compare the years 2016 and 2019. 2016 and 2019 specifically had a mast tree flowering event that had set off a breeding event for the swift parrots.
 
 ##d. Table of models 
-## Table of Models
+
 
 | Model number | Year (Season) | Distance to forest edge | Model description                     |
 |:------------:|:-------------:|:------------------------:|----------------------------------------|
@@ -132,39 +132,40 @@ the authors present data from the years 2016 and 2019. They used data specifical
 
 ## e. cleaning data/Run the models
 ```{r}
-nest_boxes_clean <- nest_boxes |> 
-  clean_names() |> 
-  mutate(box_occupant = case_match(
+nest_boxes_clean <- nest_boxes |> #uses nest_boxes data frame
+  clean_names() |> #cleans column names
+  mutate(box_occupant = case_match(  #changes box_occupant names
     box_occupant,
     "common starling" ~ "Sturnus vulgaris",
     "swift parrot" ~ "Lathamus discolor",
     "tree martin" ~ "Petrochelidon nigricans")
   ) |> 
-  mutate(season = as_factor(season)) |>        
-  rename(sp_occupant=sp) |> 
- select(edge_distance, season, sp_occupant) |> 
-drop_na() 
+  mutate(season = as_factor(season)) |>  #coverts season to a factor      
+  rename(sp_occupant=sp) |> #renames sp column
+ select(edge_distance, season, sp_occupant) |> #uses selected columns
+drop_na() #removes n/a values
 
 ```
 
 ```{r}
   
-model0 <- glm(sp_occupant~1,
-              data = nest_boxes_clean,
+model0 <- glm(sp_occupant~1, # Response: sp_occupant, no predictors 
+              data = nest_boxes_clean, #uses the nest_box_ clean data frame
               family = "binomial")
 
-model3 <- glm(sp_occupant ~edge_distance + season,
-              data = nest_boxes_clean,
+model3 <- glm(sp_occupant ~edge_distance + season,# Predictors: distance to edge and season
+              data = nest_boxes_clean,#uses the nest_box_ clean data frame
                family = "binomial")
               
-model2 <- glm(sp_occupant ~ edge_distance,
-              data = nest_boxes_clean,
+model2 <- glm(sp_occupant ~ edge_distance,# Predictor: only distance to edge
+              data = nest_boxes_clean,#uses the nest_box_ clean data frame
                family = "binomial")
-model1 <- glm(sp_occupant~ season,
-              data = nest_boxes_clean,
-               family = "binomial")
+model1 <- glm(sp_occupant~ season, # Predictor: only season
+              data = nest_boxes_clean,#uses the nest_box_ clean dat frame
+               family = "binomial") #binary outcome
 ```
 
+## f.Check the diagnostics 
 ```{r model-diagnostics}
 par(mfrow = c(2, 2)) # displays plots in a 2x2 grid
 plot(model0)
@@ -186,19 +187,19 @@ The best model as determined by Akaike's Information Criterion(AIC) included pre
 
 ##h. Visualize the model predictions
 ```{r}
-model_preds <- ggpredict(model3,
+model_preds <- ggpredict(model3,# uses model 3
                          terms = c(
-                                   "edge_distance",
-                                   "season"))
+                                   "edge_distance", #predictions using edge distance
+                                   "season")) # for each level of season
 ```
 
 ```{r}
-model_preds_plotting <-  model_preds |> # using model preds data frame to create object for momdel prediction plotting
+model_preds_plotting <-  model_preds |> # using model preds data frame 
   rename(edge_distance = x,  season = group) #renaming edge distance column
 
 ggplot() +
   geom_jitter(data=nest_boxes_clean, #uses nest boxes clean data frame
-              aes(x= edge_distance, y= sp_occupant, color = season), #uses orginal data for underlying points
+              aes(x= edge_distance, y= sp_occupant, color = season), #uses original data for underlying points
               alpha = 0.2, #makes points transparent
               width = 0.1, #jitter horizontally
               height = 0) + #no vertical jitter
@@ -209,49 +210,49 @@ ggplot() +
               aes(x= edge_distance, # x-axis as edge distance
                   ymin = conf.low, 
                   ymax = conf.high, fill= season), #lower and upper bounds of CI
-              alpha= 0.15) +
+              alpha= 0.15) + #transparency
   labs(
-    title = "Predicted Nest Box Occupancy of Swift Parrot\n by edge distance and season",
-    x = "Distance from forest edge(m)",
-    y= "Swift Parrot Nest box Occupancy") +
+    title = "Predicted Nest Box Occupancy of Swift Parrot\n by forest edge distance and season", #title of plot
+    x = "Distance from forest edge(m)", #x-axis label
+    y= "Swift Parrot Nest box Occupancy") +# y-axis label
   
-  scale_color_manual(values = c("2016" = "green", "2019" = "purple"))+
-  scale_fill_manual(values = c("2016" = "green", "2019" = "purple"))+
+  scale_color_manual(values = c("2016" = "green", "2019" = "purple"))+ #changes year colors
+  scale_fill_manual(values = c("2016" = "green", "2019" = "purple"))+# changes original colors of years
   
   theme_classic()
 ```
 
 ##i. Write a caption for your figure
 
-Figure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied by the swift parrot. 
+Figure 1: A logistic regression model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by distance from forest edge and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2019 and green line represent the season of 2016. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied.
   Stojanovic, D., Owens, G., Young, C., Alves, F., & Heinsohn, R. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
   
 ## j. Calculate model Predictions
 ```{r}
-ggpredict(model3, terms = c("edge_distance [0,900]", "season"))
+ggpredict(model3, terms = c("edge_distance [0,900]", "season")) #predictions for edge distance for 0 and 900 meters away. seprates each level of season
 ```
 
 ## k. Interpret your results
-For season 2016 at forest edge 0m the predicted probability is 0.48(95% CI:[0.33,0.64]). In 2019 at a forest edge distance of 900m the predicted probabiity is 0.30(95% CI:[0.18,0.44]). Between the 2016 and 2019 seasons at forest edge 0m the predicted probability of nest box occupancy is greater in 2016.
+For season 2016 at forest edge 0m the predicted probability is 0.48(95% CI:[0.33,0.64]). In 2019 at a forest edge distance of 900m the predicted probability is 0.30(95% CI:[0.18,0.44]). Between the 2016 and 2019 seasons at a forest edge distance of 0m the predicted probability of nest box occupancy is greater in 2016.
 
 For season 2016 at forest edge 900(m) the predicted probability is 0.12(95% CI:[0.06,0.24]). In 2019 at a forest edge distance of 900(m) the predicted probability is 0.06(95% CI:[0.03,0.13]). Between the 2016 and 2019 seasons at forest edge 900(m) the predicted probability of  nest box occupancy is greater in 2016
 
 the predicted probability of occupancy at a forest edge distance of (0m) is greater than being 900(m)away from forest edge for both seasons. The farther away the nest box is the probability of occupancy decreases. 
 
-The swift parrot is a sensitive species and as figure 1 shows the greater the distance from forest edge the probability of swift sparrow occupying the nest box decreases. This is likely due to other species like the Tree martins that has a high probability of occupying the nest boxes that are farther from the forest edge.
+The swift parrot is a sensitive species and as figure 1 shows the greater the distance from forest edge the probability of swift parrot occupying the nest box decreases. This is likely due to other species like the Tree martins that has a high probability of occupying the nest boxes that are farther from the forest edge.
 
 
 # Problem 4. Affective and exploratory visualizations
 
 ## a. Comparing visualizations 
 
-- the visualizations are different in that for my affective visualization I represented the data with only the mean time spent on school work represented in circles for each day of the week. Homework 2 the visualization was represented as jittered points for each day of the week on a plot. 
+- the visualizations are different in that for my affective visualization I represented the data with only the mean time spent on school work represented in circles for each day of the week. Homework 2 the visualization was represented as jittered points for each day of the week on a plot with minimal data. 
 
-- Some similarities were that I had the same labels x axis for both visualization which was day of week. They both represented categorical variables.
+- Some similarities were that I had the same labels (x axis) for both visualization which was day of week. They both represented categorical variables.
 
-- For homework 2 I could not see 
+- For homework 2 I could not see if there was going to be a trend because there was very little data. However for the affective visualization you can see for each day of the weak the mean time spent on schoolwork because we have more data. we can see what days i spent the most doing school work while in homework 2 I could not see a pattern yet.
 
-- Some feed back I got from week 9 workshop  was to add add a gradient score for the shade of color I used for each day of the week representing the mean. I implemented this suggestion my making a gradient score on the left side of my piece showing that the darkest shade of red represented the highest mean and the lowest shade represent the lowest mean.
+- Some feed back I got from week 9 workshop  was to add add a gradient score for the shade of color I used for each day of the week representing the mean. I implemented this suggestion my making a gradient score on the right side of my piece showing that the darkest shade of red represented the highest mean and the lowest shade represents the lowest average spent on school work.
 
 
 
