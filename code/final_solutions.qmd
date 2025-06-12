@@ -12,6 +12,8 @@ format:
 # Final Set Up
 
 ```{r setup, warning = FALSE, message=FALSE}
+#| warning: false
+#| message: false
 
  library(tidyverse)
 library(janitor)
