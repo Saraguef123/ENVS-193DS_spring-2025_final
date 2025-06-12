@@ -45,7 +45,7 @@ We found a difference (η2= effect size) in average nitrogen load between source
 
 # Problem 2. Data visualization 
 
-##a.) Cleaning and Summarizing 
+## a. Cleaning and Summarizing 
 ```{r}
 sst_clean <- sst |>  #uses the sst data frame
   clean_names() |> # cleans columns names
@@ -120,7 +120,7 @@ Swift parrots are an endangered species and the nest boxes were intended for the
 ## c. Difference in “seasons”
 The authors compare the years 2016 and 2019. 2016 and 2019 specifically had a mast tree flowering event that had set off a breeding event for the swift parrots.
 
-##d. Table of models 
+## d. Table of models 
 
 
 | Model number | Year (Season) | Distance to forest edge | Model description                     |
