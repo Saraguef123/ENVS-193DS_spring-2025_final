@@ -14,7 +14,7 @@ format:
 ```{r setup, warning = FALSE, message=FALSE}
 #| warning: false
 #| message: false
-
+options(warn = -1)
  library(tidyverse)
 library(janitor)
 library(gt)
