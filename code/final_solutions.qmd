@@ -187,7 +187,7 @@ AICc(model0,
 ```
 The best model as determined by Akaike's Information Criterion(AIC) included predictors edge distance and seasons(2016 and 2019) and the response is if swift parrot was present(occupied=1, not occupied =0)
 
-##h. Visualize the model predictions
+## h. Visualize the model predictions
 ```{r}
 model_preds <- ggpredict(model3,# uses model 3
                          terms = c(
@@ -224,7 +224,7 @@ ggplot() +
   theme_classic()
 ```
 
-##i. Write a caption for your figure
+## i. Write a caption for your figure
 
 Figure 1: A logistic regression model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by distance from forest edge and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2019 and green line represent the season of 2016. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied.
   Stojanovic, D., Owens, G., Young, C., Alves, F., & Heinsohn, R. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
