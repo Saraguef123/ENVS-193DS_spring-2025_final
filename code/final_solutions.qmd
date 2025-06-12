@@ -216,12 +216,23 @@ ggplot() +
 ```
 
 ##i. Write a caption for your figure
-FIgure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied by the swift parrot. 
+
+Figure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied by the swift parrot. 
   Stojanovic, D., Owens, G., Young, C., Alves, F., & Heinsohn, R. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
   
 ## j. Calculate model Predictions
 ```{r}
 ggpredict(model3, terms = c("edge_distance [0,900]", "season"))
 ```
+
+## k. Interpret your results
+For season 2016 at forest edge 0m the predicted probability is 0.48(95% CI:[0.33,0.64]). In 2019 at a forest edge distance of 900m the predicted probabiity is 0.30(95% CI:[0.18,0.44]). Between the 2016 and 2019 seasons at forest edge 0m the predicted probability of nest box occupancy is greater in 2016.
+
+For season 2016 at forest edge 900(m) the predicted probability is 0.12(95% CI:[0.06,0.24]). In 2019 at a forest edge distance of 900(m) the predicted probability is 0.06(95% CI:[0.03,0.13]). Between the 2016 and 2019 seasons at forest edge 900(m) the predicted probability of  nest box occupancy is greater in 2016
+
+the predicted probability of occupancy at a forest edge distance of (0m) is greater than being 900(m)away from forest edge for both seasons. The farther away the nest box is the probability of occupancy decreases. 
+
+The swift parrot is a sensitive species and as figure 1 shows the greater the distance from forest edge the probability of swift sparrow occupying the nest box decreases. This is likely due to other species like the Tree martins that has a high probability of occupying the nest boxes that are farther from the forest edge.
+
 
 
