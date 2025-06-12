@@ -33,11 +33,11 @@ nest_boxes <- read.csv(here("data","occdist.csv"))
 # Problem 1: Research Writing
 
 ## a.) Transparent statistical methods
-In part 1 they used a person's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being annual total nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a persons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
+In part 1 they used a Pearson's R test because they specifically  state no correlation indicating that they are seeing if there is a correlation between the two variables being annual total nitrogen load and headwater distance. In addition they use numerical variables which indicate it's a pearsons test and not a spearman's test. In part 2 they use a one- way Anova test because the test describes how they are comparing means of different sources being urban land, fertilizer, and wastewater treatment across the one factor which is nitrogen load(kg year-1)
 
 ## b.) More information needed
 One additional part  in part 2 the author could have addressed is a Post-HOC: Tukey HSD test because it would be meaningful to know which sources are different from each other. For example is there a difference in average nitrogen load between fertilizers and urban land.
-Another addition they could have mentioned is the effective size because it would be more descriptive to know the magnitude of the differences between sources, not just saying they are significant with a p value because there could be a significant p value but we want to  know the magnitude and what it means in the context of the problem.
+Another addition they could have mentioned is the effect size because it would be more descriptive to know the magnitude of the differences between sources, not just saying they are significant with a p value because there could be a significant p value but we want to  know the magnitude of difference and what it means in the context of the problem.
 
 ## c.)
 We found a (size difference (η2= effect size) difference in average nitrogen load between sources(one-way ANOVA, F(?, ?) = value, p < 0.02, α = significance level).
@@ -47,28 +47,28 @@ We found a (size difference (η2= effect size) difference in average nitrogen lo
 
 ##a.) Cleaning and Summarizing 
 ```{r}
-sst_clean <- sst |> 
-  clean_names() |> 
-  select(temp,date) |> 
+sst_clean <- sst |>  #uses the sst data frame
+  clean_names() |> # cleans columns names
+  select(temp,date) |> #uses the temp and date column
   mutate(
-    date = mdy(date),
-    year = year(date),
-    month = month(date, label= TRUE, abbr = TRUE),
-    month = as_factor(month),
-    month = fct_relevel(
+    date = mdy(date), #changes the date to this format(month-day-year)
+    year = year(date), #extracts year from the date
+    month = month(date, label= TRUE, abbr = TRUE), #extracts month from 
+    month = as_factor(month), #month as a factor
+    month = fct_relevel( #reorders the months 
 month,
 "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
   ) |> 
-filter(year %in% c(2018,2019,2020,2021,2022,2023)) |> 
-  mutate(year = as_factor(year)) |> 
-group_by(year,month) |> 
+filter(year %in% c(2018,2019,2020,2021,2022,2023)) |> # keeps only data from those years
+  mutate(year = as_factor(year)) |> #converts year to factor
+group_by(year,month) |> #groups data by year and month
   summarize(
-    mean_monthly_sst = round(mean(temp), 1),
-    .groups = "drop")
-sst_clean |> 
-  ungroup() |> 
-  select(year,month, mean_monthly_sst) |> 
-  slice_sample(n = 5)
+    mean_monthly_sst = round(mean(temp), 1), #calculates mean monthly sea surface temp, rounds to one decimal place
+    .groups = "drop") #drops groups after summarizing
+sst_clean |>  #takes the clean data frame
+  ungroup() |> # ungroups it
+  select(year,month, mean_monthly_sst) |> #Keeps specified columns
+  slice_sample(n = 5) #selects 5 random rows
 ```
 
 ```{r}
@@ -239,7 +239,13 @@ The swift parrot is a sensitive species and as figure 1 shows the greater the di
 
 ## a. Comparing visualizations 
 
-- 
+- the visualizations are different in that for my affective visualization I represented the data with only the mean time spent on school work represented in circles for each day of the week. Homework 2 the visualization was represented as jittered points for each day of the week on a plot. 
+
+- Some similarities were that I had the same labels x axis for both visualization which was day of week. They both represented categorical variables.
+
+- For homework 2 I could not see 
+
+- Some feed back I got from week 9 workshop  was to add add a gradient score for the shade of color I used for each day of the week representing the mean. I implemented this suggestion my making a gradient score on the left side of my piece showing that the darkest shade of red represented the highest mean and the lowest shade represent the lowest mean.
 
 
 
