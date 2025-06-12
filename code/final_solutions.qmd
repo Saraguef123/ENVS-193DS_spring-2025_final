@@ -193,8 +193,8 @@ model_preds_plotting <-  model_preds |> # using model preds data frame to create
 ggplot() +
   geom_jitter(data=nest_boxes_clean, #uses nest boxes clean data frame
               aes(x= edge_distance, y= sp_occupant, color = season), #uses orginal data for underlying points
-              alpha = 0.3, #makes points transparent
-              width = 0.05, #jitter horizontally
+              alpha = 0.2, #makes points transparent
+              width = 0.1, #jitter horizontally
               height = 0) + #no vertical jitter
   geom_line(data= model_preds_plotting, #uses model_preds_plotting data frame
              aes(x= edge_distance, #x-axis as edge distance
@@ -204,9 +204,11 @@ ggplot() +
                   ymin = conf.low, 
                   ymax = conf.high, fill= season), #lower and upper bounds of CI
               alpha= 0.15) +
+  scale_color_manual(values = c("2016" = "green", "2019" = "purple"))+
+  scale_fill_manual(values = c("2016" = "green", "2019" = "purple"))+
   
   theme_classic()
 ```
 
 ##i. Write a caption for your figure
-FIgure 1: The predicted probability of swift parrot(Lathamus discolor) nest occupancy  
+FIgure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupany with 1 being occupied and 0 being not occupied by the swift parrot.
