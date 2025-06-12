@@ -235,4 +235,11 @@ the predicted probability of occupancy at a forest edge distance of (0m) is grea
 The swift parrot is a sensitive species and as figure 1 shows the greater the distance from forest edge the probability of swift sparrow occupying the nest box decreases. This is likely due to other species like the Tree martins that has a high probability of occupying the nest boxes that are farther from the forest edge.
 
 
+# Problem 4. Affective and exploratory visualizations
+
+## a. Comparing visualizations 
+
+- 
+
+
 
