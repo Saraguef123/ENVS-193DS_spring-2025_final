@@ -204,6 +204,11 @@ ggplot() +
                   ymin = conf.low, 
                   ymax = conf.high, fill= season), #lower and upper bounds of CI
               alpha= 0.15) +
+  labs(
+    title = "Predicted Nest Box Occupancy of Swift Parrot\n by edge distance and season",
+    x = "Distance from forest edge(m)",
+    y= "Swift Parrot Nest box Occupancy") +
+  
   scale_color_manual(values = c("2016" = "green", "2019" = "purple"))+
   scale_fill_manual(values = c("2016" = "green", "2019" = "purple"))+
   
@@ -211,4 +216,12 @@ ggplot() +
 ```
 
 ##i. Write a caption for your figure
-FIgure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupany with 1 being occupied and 0 being not occupied by the swift parrot.
+FIgure 1: A logistic regression linear model showing the predicted probability of swift parrot(Lathamus discolor) nest occupancy by edge distance and season. The lines represent the predicted probability of nest occupancy by the Swift Parrot from each season  The purple line represents the probability for the season of 2016 and blue line represent the season of 2019. The shaded ribbons around the lines represent the 95% confidence interval for the predicted probabilities. The individual points represent swift parrot occupancy with 1 being occupied and 0 being not occupied by the swift parrot. 
+  Stojanovic, D., Owens, G., Young, C., Alves, F., & Heinsohn, R. (2021). Do nest boxes breed the target species or its competitors? A case study of a critically endangered bird [Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
+  
+## j. Calculate model Predictions
+```{r}
+ggpredict(model3, terms = c("edge_distance [0,900]", "season"))
+```
+
+
