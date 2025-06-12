@@ -208,4 +208,5 @@ ggplot() +
   theme_classic()
 ```
 
-
+##i. Write a caption for your figure
+FIgure 1: The predicted probability of swift parrot(Lathamus discolor) nest occupancy  
