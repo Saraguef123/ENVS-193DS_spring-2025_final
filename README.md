@@ -37,6 +37,6 @@ occdist.csv: data from Stojanovic, Dejan et al. (2021). Do nest boxes breed the 
 
 ## **Rendered output**
 
-The rendered html output for this repo is [here](https://Saraguef123.github.io/ENVS-193DS_homework-03/code/final_solutions.html)
+The rendered html output for this repo is [here](https://saraguef123.github.io/ENVS-193DS_spring-2025_final/code/final_solutions)
 
 
