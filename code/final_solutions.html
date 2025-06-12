@@ -90,6 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#problem-2.-data-visualization" id="toc-problem-2.-data-visualization" class="nav-link" data-scroll-target="#problem-2.-data-visualization">Problem 2. Data visualization</a>
   <ul class="collapse">
+  <li><a href="#a.-cleaning-and-summarizing" id="toc-a.-cleaning-and-summarizing" class="nav-link" data-scroll-target="#a.-cleaning-and-summarizing">a. Cleaning and Summarizing</a></li>
   <li><a href="#b.-visualize-the-data" id="toc-b.-visualize-the-data" class="nav-link" data-scroll-target="#b.-visualize-the-data">b. Visualize the data</a></li>
   </ul></li>
   <li><a href="#problem-3.-data-analysis" id="toc-problem-3.-data-analysis" class="nav-link" data-scroll-target="#problem-3.-data-analysis">Problem 3. Data analysis</a>
@@ -97,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a.-response-variable" id="toc-a.-response-variable" class="nav-link" data-scroll-target="#a.-response-variable">a. Response variable</a></li>
   <li><a href="#b.-purpose-of-study" id="toc-b.-purpose-of-study" class="nav-link" data-scroll-target="#b.-purpose-of-study">b. Purpose of study</a></li>
   <li><a href="#c.-difference-in-seasons" id="toc-c.-difference-in-seasons" class="nav-link" data-scroll-target="#c.-difference-in-seasons">c.&nbsp;Difference in “seasons”</a></li>
+  <li><a href="#d.-table-of-models" id="toc-d.-table-of-models" class="nav-link" data-scroll-target="#d.-table-of-models">d.&nbsp;Table of models</a></li>
   <li><a href="#e.-cleaning-datarun-the-models" id="toc-e.-cleaning-datarun-the-models" class="nav-link" data-scroll-target="#e.-cleaning-datarun-the-models">e. cleaning data/Run the models</a></li>
   <li><a href="#f.check-the-diagnostics" id="toc-f.check-the-diagnostics" class="nav-link" data-scroll-target="#f.check-the-diagnostics">f.Check the diagnostics</a></li>
   <li><a href="#g.-select-the-best-model" id="toc-g.-select-the-best-model" class="nav-link" data-scroll-target="#g.-select-the-best-model">g. Select the best model</a></li>
@@ -180,7 +182,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="problem-2.-data-visualization" class="level1">
 <h1>Problem 2. Data visualization</h1>
-<p>##a.) Cleaning and Summarizing</p>
+<section id="a.-cleaning-and-summarizing" class="level2">
+<h2 class="anchored" data-anchor-id="a.-cleaning-and-summarizing">a. Cleaning and Summarizing</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sst_clean <span class="ot">&lt;-</span> sst <span class="sc">|&gt;</span>  <span class="co">#uses the sst data frame</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="co"># cleans columns names</span></span>
@@ -208,11 +211,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 5 × 3
   year  month mean_monthly_sst
   &lt;fct&gt; &lt;ord&gt;            &lt;dbl&gt;
-1 2020  Oct               19.0
-2 2022  Jun               16.2
-3 2020  Dec               14.5
-4 2021  Apr               13.1
-5 2021  May               14.4</code></pre>
+1 2023  Oct               17.4
+2 2021  Jan               13.9
+3 2021  May               14.4
+4 2020  Jul               17.0
+5 2023  Jul               16.3</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -224,6 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ mean_monthly_sst: num [1:72] 15 14.3 13.5 12.8 13.6 ...</code></pre>
 </div>
 </div>
+</section>
 <section id="b.-visualize-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="b.-visualize-the-data">b. Visualize the data</h2>
 <div class="cell">
@@ -282,7 +286,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="c.-difference-in-seasons" class="level2">
 <h2 class="anchored" data-anchor-id="c.-difference-in-seasons">c.&nbsp;Difference in “seasons”</h2>
 <p>The authors compare the years 2016 and 2019. 2016 and 2019 specifically had a mast tree flowering event that had set off a breeding event for the swift parrots.</p>
-<p>##d.&nbsp;Table of models</p>
+</section>
+<section id="d.-table-of-models" class="level2">
+<h2 class="anchored" data-anchor-id="d.-table-of-models">d.&nbsp;Table of models</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 14%">
