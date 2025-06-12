@@ -63,7 +63,7 @@ filter(year %in% c(2018,2019,2020,2021,2022,2023)) |> # keeps only data from tho
   mutate(year = as_factor(year)) |> #converts year to factor
 group_by(year,month) |> #groups data by year and month
   summarize(
-    mean_monthly_sst = round(mean(temp), 1), #calculates mean monthly sea surface temp, rounds to one decimal place
+    mean_monthly_sst = round(mean(temp), 2), #calculates mean monthly sea surface temp, rounds to one decimal place
     .groups = "drop") #drops groups after summarizing
 sst_clean |>  #takes the clean data frame
   ungroup() |> # ungroups it
@@ -72,32 +72,38 @@ sst_clean |>  #takes the clean data frame
 ```
 
 ```{r}
-str(sst_clean)
+str(sst_clean) # structure of sst_clean data frame
 ```
 
 ## b. Visualize the data 
 ```{r}
-ggplot(data = sst_clean,
-       aes(x=month,
-           y= mean_monthly_sst,
-           color = year,
-           group = year))+
-geom_point() +
-  geom_line()+
+ggplot(data = sst_clean, #uses sst_clean data frame
+       aes(x=month, #x-axis as month
+           y= mean_monthly_sst, #y-axis as sst
+           color = year, # colors by year
+           group = year))+ #groups data by years
+geom_point() + #adds points 
+  geom_line()+ #adds lines
 
 labs(
-  x = "Month",
-  y = "Mean monthly sea surface temperature(°C)",
-  color = "Year"
-)  
-  #scale_color_manual(values = )+
- #theme_classic()
-  #theme(
-#panel.grid.major = element_blank(),
-#panel.grid.minor = element_blank(),
-#panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
-#legend.position = c(0.1,0.7))
-#makes a gray border
+  x = "Month", #changes x-axis label
+  y = "Mean monthly sea surface temperature(°C)", #labels y-axis
+  color = "Year" #labels legend
+) + 
+ scale_color_manual(values = c( #sets colors in gradient
+   "#c6dbef",
+   "#9ecae1",
+   "#6baed6",
+   "#4292c6",
+   "#2171b5",
+   "#08306b"
+ ) ) +
+ theme_classic() + # theme
+  theme(
+panel.grid.major = element_blank(), # no grid lines
+panel.grid.minor = element_blank(), #no grid lines
+panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+legend.position = c(0.1,0.7)) # makes a border
     
   
 
